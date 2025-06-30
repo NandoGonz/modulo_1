@@ -2,35 +2,7 @@ from prettytable import PrettyTable
 
 
 # base de datos en memoria
-libros = [{
-    "isbn": "1",
-    "titulo": "Cien años de soledad",
-    "autor": "Gabriel García Márquez",
-    "estado": "Disponible",
-    "socio_prestado": None
-},
-{
-    "isbn": "2",
-    "titulo": "Rayuela",
-    "autor": "Julio Cortázar",
-    "estado": "Disponible",
-    "socio_prestado": None
-},
-{
-    "isbn": "3",
-    "titulo": "1984",
-    "autor": "George Orwell",
-    "estado": "Disponible",
-    "socio_prestado": None
-},
-{
-    "isbn": "4",
-    "titulo": "El principito",
-    "autor": "Antoine de Saint-Exupéry",
-    "estado": "Disponible",
-    "socio_prestado": None
-}
-          
+libros = [     
 ]
 socios = []
 aux_contador = 1
