@@ -6,7 +6,6 @@ import uuid
 libros = []
 socios = []
 
-aux_contador = 1
 
 # creamos una funcion para mostrar un menú 
 def mostrar_menu():
