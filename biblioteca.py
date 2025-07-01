@@ -1,10 +1,11 @@
+# importamos librerias para opmizar el fincionamiento del programa 
 from prettytable import PrettyTable
-
+import uuid 
 
 # base de datos en memoria
-libros = [     
-]
+libros = []
 socios = []
+
 aux_contador = 1
 
 # creamos una funcion para mostrar un menú 
@@ -20,7 +21,7 @@ def mostrar_menu():
     print("0. Salir")
     
 def registrar_libro():
-    global libros 
+    
     
     print("=================================")
     print("Registrar libros📖")  
@@ -75,9 +76,58 @@ def registrar_libro():
     print(f"ISBN: {isbn}")
    
     print("=================================") 
-    
+
+
+# creamos las variables para registrar a nuestros socios    
 def registrar_socio():
-    pass
+    print("=================================") 
+    print("\n registro para socios nuevos")
+    print("=================================") 
+    
+    print("Digite 0 para cancelar la acción")
+    
+    nombre = input("Escriba el nombre del socio: ").strip().lower()
+    if nombre == "0":
+        return
+    
+    if not nombre:
+        print("❌El nombre del usuario no debe estar vacio❌")
+        
+        
+    apellido = input("Ingrese el apellido del usuario: ") 
+    if apellido == "0":
+        return
+    
+    if not apellido:
+       print("❌El apellido del usuario no debe estar vacio❌") 
+       
+    email = input("Ingrese el email del socio: ")
+    if email == "0":
+        return
+    if not email:
+        print("❌El email del usuario no puede estar vacio ❌")
+        
+       
+    # usamos uuid4() que es una funcion del modulo uuid   
+    id_usuario = str(uuid.uuid4())
+    
+    # creamos un diccionario para guardar nuestros datos en una lista
+    usuario = {
+        "id" : id_usuario,
+        "nombre" : nombre,
+        "apellido" : apellido,
+        "email" : email,
+        "libros_prestados" : []
+    }
+    
+    # agregamos nuestro diccionario a nuestra lista de socios
+    socios.append(usuario)
+    print("✅El socio fue registrado de forma corredcta")
+    print(f" 👨‍💼{nombre} {apellido}")
+    print(f"📧{email}")
+    print(f"🆔 ID: {id_usuario}")
+    
+    
 
 def prestar_libro():
     pass
@@ -112,7 +162,7 @@ def ver_todos_libros():
     
     table.field_names = ["titulo", "autor", "isbn", "estado"]
     
-    table.title= "📖Mostrando todos los libros📖"
+    table.title = "📖Mostrando todos los libros📖"
     
     for i, libro in enumerate(libros, 1):
         table.add_row([libro["titulo"], libro["autor"], libro["isbn"], libro["estado"]])
@@ -120,8 +170,42 @@ def ver_todos_libros():
     print(table)
 
 def ver_todos_socios():
-    pass
     
+    if not socios:
+         print("❌ No hay socios registrados ❌")
+         return
+        
+    
+    # creamos un ciclo for para recorrer nuestra lista y mostrar los socios 
+    table = PrettyTable()
+    
+    
+    table.field_names = ["id", "nombre", "apellido", "email", "libros_prestados"]
+    
+    table.title = "🧍Mostrando todos los socios🧍"
+    
+    for s, socio in enumerate(socios): 
+        libros_prestados = len(socio["libros_prestados"])
+        table.add_row([socio["id"], socio["nombre"],socio["apellido"],socio["email"], libros_prestados])
+        
+        print(table)
+    '''print("================================================================")
+    print("Mostrando todos los socios")
+    print("================================================================")
+
+    if not socios:
+        print("No hay socios registrados en la biblioteca")
+        return
+    
+    for i, socio in enumerate(socios, 1):
+        print("================================================================")
+        print(f"{i}. ID: {socio["id"]}")
+        print(f"     Nombre: {socio["nombre"]} {socio["apellido"]}")
+        print(f"     Email: {socio["email"]}")
+        print(f"     Libros Prestados: {len(socio["libros_prestados"])}")
+        print("================================================================")
+    '''
+        
     
 def main():
      
@@ -134,7 +218,7 @@ def main():
             case "1":
                registrar_libro()
             case "2":
-                registrar_socio() # crear codigo
+                registrar_socio() 
             case "3":
                 prestar_libro()
             case "4":
@@ -144,7 +228,7 @@ def main():
             case "6":
                 ver_todos_libros()
             case "7":
-                ver_todos_socios()# crear codigo
+                ver_todos_socios()
             
             case "0": 
                 print("📚Gracias por usar mi MINIBIBLIOTECA!📚")
